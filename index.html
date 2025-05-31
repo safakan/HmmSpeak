@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HmmSpeak - Language Practice</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">HmmSpeak</div>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('practice')">Practice</button>
+            <button class="nav-btn" onclick="showSection('about')">About</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Practice Section -->
+        <div class="section practice" id="practice-section">
+            <div class="practice-content">
+                <!-- Start Button -->
+                <div class="start-button-container">
+                    <button class="start-btn start" id="start-btn" onclick="togglePractice()">
+                        🎤 Start Practice
+                    </button>
+                    <div class="status-text" id="status-text" style="display: none;">
+                        Listening... Start your conversation!
+                    </div>
+                </div>
+
+                <!-- AI Sidekick Box -->
+                <div class="ai-sidekick-box">
+                    <div class="ai-sidekick-text" id="ai-sidekick-text"></div>
+                </div>
+
+                <!-- Vocabulary Grid -->
+                <div class="vocabulary-grid">
+                    <!-- Nouns Column -->
+                    <div class="vocab-column nouns">
+                        <div class="vocab-title">Nouns</div>
+                        <div class="vocab-words" id="nouns-list"></div>
+                    </div>
+
+                    <!-- Adjectives Column -->
+                    <div class="vocab-column adjectives">
+                        <div class="vocab-title">Adjectives</div>
+                        <div class="vocab-words" id="adjectives-list"></div>
+                    </div>
+
+                    <!-- Verbs Column -->
+                    <div class="vocab-column verbs">
+                        <div class="vocab-title">Verbs</div>
+                        <div class="vocab-words" id="verbs-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section about" id="about-section">
+            <div class="about-content">
+                <div class="about-header">
+                    <h1 class="about-title">HmmSpeak</h1>
+                    <p class="about-subtitle">Breaking language barriers through natural conversation practice</p>
+                </div>
+
+                <div class="about-cards">
+                    <div class="about-card">
+                        <h3>Why We Built This</h3>
+                        <p>HmmSpeak was built to help language learners practice speaking in the most natural way possible - through real conversations with friends or language partners.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>How to Use</h3>
+                        <p>Simply start a practice session and begin talking with your conversation partner. When you get stuck or need inspiration, glance at the screen for helpful suggestions, vocabulary, and conversation prompts.</p>
+                    </div>
+                </div>
+
+                <div class="goal-card">
+                    <h3>Our Goal</h3>
+                    <p>Our goal is to make language practice feel effortless and enjoyable, removing the pressure of formal exercises while providing gentle guidance when needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
