@@ -1,18 +1,19 @@
 // Configurable content - easy to modify
 const PRACTICE_CONTENT = {
     ai_sidekick_text: [
-        "Try describing your favorite childhood memory in detail.",
+        "Ou la la! That sounds fun! Are there any birds around?",
     ],
     nouns: [
-        "adventure", "opportunity", "challenge", "experience", "memory", "tradition", "culture"
+        "journey", "story", "idea", "scene", "gathering", "moment", "impression"
     ],
     adjectives: [
-        "fascinating", "incredible", "remarkable", "outstanding", "magnificent", "extraordinary", "brilliant"
+        "vivid", "delightful", "curious", "breezy", "colorful", "playful", "captivating"
     ],
     verbs: [
-        "explore", "discover", "achieve", "create", "inspire", "motivate", "encourage"
+        "wander", "notice", "express", "imagine", "laugh", "share", "connect"
     ]
 };
+
 
 let isListening = false;
 let updateInterval;
