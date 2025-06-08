@@ -6,17 +6,9 @@ from together import Together
 import textwrap
 
 
-from pydantic import BaseModel, Field
-from typing import List
-class ConversationHelper(BaseModel):
-    ai_response_sentence: str
-    nouns: List[str] = Field(min_items=5, max_items=5)
-    adjectives: List[str] = Field(min_items=5, max_items=5)
-    verbs: List[str] = Field(min_items=5, max_items=5)
 
-def prompt_llm(prompt, with_linebreak=False):
+def prompt_llm(prompt):
     # Get API key from environment variable or command line argument
-    # parsing command line argument if there are additional arguments
     if len(sys.argv) > 1:
         parser = argparse.ArgumentParser()
         parser.add_argument("-k", "--api_key", type=str, default=None)
@@ -35,7 +27,6 @@ def prompt_llm(prompt, with_linebreak=False):
     client = Together(api_key=api_key)
 
     # model
-    #model = "meta-llama/Meta-Llama-3-8B-Instruct-Lite"
     model = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
     
     # Make the API call
@@ -73,15 +64,7 @@ def prompt_llm(prompt, with_linebreak=False):
     )
     output = response.choices[0].message.content
 
-    # considering to remove this linebreak option
-    if with_linebreak:
-        # Wrap the output
-        wrapped_output = textwrap.fill(output, width=50)
-    
-        return wrapped_output
-    else:
-        return output
-
+    return output
 
 PROMPT_TEMPLATE_basic_user_request = """
 help the user with the following request:

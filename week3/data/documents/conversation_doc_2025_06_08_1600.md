@@ -1,0 +1,1 @@
+Oh yes I think that is beautiful... think so? there are dolphins around are you seeing them? where do you see look look under the boat! should we slow down? I don't know this is my first time seeing such a thing. Should be worried at all? no no at all, this is lovely.
