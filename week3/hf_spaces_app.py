@@ -1,7 +1,19 @@
+## SAME AS minimal_gradio.py
+## EXCEPT LAUNCH SETTINGS
+#demo.launch(
+#        server_name="0.0.0.0",
+#        server_port=7860,  
+#        share=False,      
+#        inbrowser=False         
+#    )
+
+
 import gradio as gr
 import json
 import os
 from datetime import datetime
+
+
 
 def load_data():
     try:
@@ -83,6 +95,7 @@ with gr.Blocks() as demo:
 
 # Force English language
 os.environ['GRADIO_LANG'] = 'en'
+
 
 
 # Launch with English interface
