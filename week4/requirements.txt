@@ -1,0 +1,7 @@
+together
+faiss-cpu
+sentence-transformers
+python-dotenv
+fastmcp
+httpx
+Flask
