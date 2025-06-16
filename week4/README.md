@@ -1,6 +1,6 @@
 # Week 4: Flask, RAG and MCP Learning
 
-This week covers Flask web development and Message Control Protocol (MCP) implementation. Contains three main parts:
+This week covers Flask web development, RAG and Message Control Protocol (MCP) implementation. Contains three main parts:
 
 ## 1. Flask Tutorial App (`flask/`)
 
@@ -22,19 +22,19 @@ cd scripts
 python -m venv venv
 source venv/bin/activate  # or `venv\Scripts\activate` on Windows
 pip install -r requirements.txt
-python mcp_server.py
+python mcp_server_example.py
 ```
 
 ### MCP Client
 ```bash
 # In a new terminal, with the same venv
-python mcp_client.py
+python mcp_client_example.py
 ```
 
 ### RAG Example
 ```bash
 # In the same venv
-python rag_example.py
+python rag.py
 ```
 
 ## 3. HmmSpeak Flask App (`hmmspeak-flask/`)
