@@ -2,6 +2,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from openai import OpenAI
+import io
 
 # Configure logging
 logging.basicConfig(
@@ -39,10 +40,15 @@ def transcribe_audio(audio_file, model: str = "whisper-1") -> str:
     logger.debug("OpenAI client initialized")
 
     try:
-        # Pass the file-like object directly
+        # Read the entire stream into an in-memory BytesIO object
+        audio_bytes = io.BytesIO(audio_file.read())
+        # The seek(0) is now handled in routes.py for the original stream
+
+        # Pass a tuple (filename, file-object, mimetype) for OpenAI compatibility
+        file_tuple = (audio_file.filename, audio_bytes, audio_file.mimetype)
         transcription = client.audio.transcriptions.create(
             model=model, 
-            file=audio_file
+            file=file_tuple
         )
         logger.info("Transcription completed successfully")
         return transcription.text

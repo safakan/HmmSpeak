@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HmmSpeak - Language Practice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">HmmSpeak</div>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('practice')">Practice</button>
+            <button class="nav-btn" onclick="showSection('about')">About</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Practice Section -->
+        <div class="section practice active" id="practice-section">
+            <div class="practice-content">
+                <!-- Start Button -->
+                <div class="start-button-container">
+                    <button class="start-btn start" id="start-btn">
+                        🎤 Start Practice
+                    </button>
+                    <div class="status-text" id="status-text" style="display: none;">
+                        Listening... Start your conversation!
+                    </div>
+                </div>
+
+                <!-- AI Sidekick Box -->
+                <div class="ai-sidekick-box">
+                    <div class="ai-sidekick-text" id="ai-sidekick-text"></div>
+                </div>
+
+                <!-- Vocabulary Grid -->
+                <div class="vocabulary-grid">
+                    <!-- Nouns Column -->
+                    <div class="vocab-column nouns">
+                        <div class="vocab-title">Nouns</div>
+                        <div class="vocab-words" id="nouns-list"></div>
+                    </div>
+
+                    <!-- Adjectives Column -->
+                    <div class="vocab-column adjectives">
+                        <div class="vocab-title">Adjectives</div>
+                        <div class="vocab-words" id="adjectives-list"></div>
+                    </div>
+
+                    <!-- Verbs Column -->
+                    <div class="vocab-column verbs">
+                        <div class="vocab-title">Verbs</div>
+                        <div class="vocab-words" id="verbs-list"></div>
+                    </div>
+                </div>
+                <!-- Transcription Box -->
+                <div class="transcription-box" id="transcription-box">
+                    <div class="transcription-title">Full Transcription</div>
+                    <div class="transcription-text" id="transcription-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section about" id="about-section">
+            <div class="about-content">
+                <div class="about-header">
+                    <h1 class="about-title">HmmSpeak</h1>
+                    <p class="about-subtitle">Breaking language barriers through natural conversation practice</p>
+                </div>
+
+                <div class="about-cards">
+                    <div class="about-card">
+                        <h3>Why We Built This</h3>
+                        <p>HmmSpeak was built to help language learners practice speaking in the most natural way possible - through real conversations.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <h3>How to Use</h3>
+                        <p>Simply start a practice session and begin talking with your conversation partner. When you get stuck or need inspiration, glance at the screen, use what's on the screen and keep talking.</p>
+                    </div>
+                </div>
+
+                <div class="goal-card">
+                    <h3>Our Goal</h3>
+                    <p>Our goal is to make language practice feel natural and enjoyable, removing the pressure of formal exercises while providing gentle guidance when needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script>
+        // Section navigation logic
+        function showSection(section) {
+            const practiceSection = document.getElementById('practice-section');
+            const aboutSection = document.getElementById('about-section');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            if (section === 'practice') {
+                practiceSection.classList.add('active');
+                aboutSection.classList.remove('active');
+                navBtns[0].classList.add('active');
+                navBtns[1].classList.remove('active');
+            } else {
+                practiceSection.classList.remove('active');
+                aboutSection.classList.add('active');
+                navBtns[0].classList.remove('active');
+                navBtns[1].classList.add('active');
+            }
+        }
+        // Show practice section by default
+        showSection('practice');
+    </script>
+</body>
+</html> 
