@@ -1,21 +1,42 @@
 # HmmSpeak for VAM 6 week program, ai app idea building
 
-HmmSpeak is an app helping people practice speaking skills in a new language with other people in real time. To use the app users will open it, click start and continue their conversation. If they ever get stuck within their conversation they can have a look on the screen. The screen will contain related words (lists of nouns, adjectives, verbs) and ai response. Stuck user who is troubling to form sentences can use the listed words and try to form a sentence. If not they can repeat what the ai response is saying to the person next to them and the conversation can continue.
+HmmSpeak helps people practice speaking skills in a new language with real-time conversation partners. The app provides word suggestions and AI responses when users get stuck, helping them continue their conversation naturally.
 
-Recording > Transcribe > Conversation Document > LLM > output data: {
-    ai_response: String(ai_response),
-    nouns: List[nouns],
-    adjectives: List[adjectives],
-    verbs: List[verbs],
-} 
+## How It Works
 
----
+1. Users start a conversation
+2. If they get stuck, they can look at the screen for:
+   - Related words (nouns, adjectives, verbs)
+   - AI-generated response suggestions
+3. Users can either:
+   - Use the suggested words to form their own sentences
+   - Repeat the AI response to continue the conversation
+   - Improvise based on suggestions
 
-The app is currently in building process.
-Repository explanation:
-- playground
-    area to contain anything about the app.
-- week1, week2, week3, week4, week5, week6 folders contain work related to and done within the respective weeks tasks/stories. Week5 and week6 are empty right now.
-- README.md is this file explaining the project.
+## Data Flow
+
+```
+Recording > Transcribe > Conversation Document > LLM > Output Data
+```
+
+Output format:
+```json
+{
+    "ai_response": "String",
+    "nouns": ["word1", "word2", ...],
+    "adjectives": ["word1", "word2", ...],
+    "verbs": ["word1", "word2", ...]
+}
+```
+
+## Repository Structure
+
+- `playground/` - Sandbox area for app-related experiments
+- `week1/` - Initial app concept and Gradio UI
+- `week2/` - Raw HTML/CSS/JS demo
+- `week3/` - Gradio implementation with local and Hugging Face versions
+- `week4/` - Flask web app, MCP and RAG implementation
+
+Each weekly folder contains its own README.md with detailed instructions.
 
 ---
