@@ -31,6 +31,7 @@ Output format:
 
 ## Repository Structure
 
+- `HmmSpeakApp/` - Location of the main HmmSpeak app.
 - `playground/` - Sandbox area for app-related experiments
 - `week1/` - Initial app concept and Gradio UI
 - `week2/` - Raw HTML/CSS/JS demo
