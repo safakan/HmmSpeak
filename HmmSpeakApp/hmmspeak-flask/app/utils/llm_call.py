@@ -15,7 +15,8 @@ def prompt_llm(prompt):
     client = Together(api_key=api_key)
 
     # model
-    model = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+    # model = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+    model = "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo"
     
     # Make the API call
     response = client.chat.completions.create(
@@ -29,21 +30,15 @@ def prompt_llm(prompt):
                     "ai_response_sentence": {"type": "string"},
                     "nouns": {
                         "type": "array",
-                        "items": {"type": "string"},
-                        "minItems": 5,
-                        "maxItems": 5
+                        "items": {"type": "string"}
                     },
                     "adjectives": {
                         "type": "array",
-                        "items": {"type": "string"},
-                        "minItems": 5,
-                        "maxItems": 5
+                        "items": {"type": "string"}
                     },
                     "verbs": {
                         "type": "array",
-                        "items": {"type": "string"},
-                        "minItems": 5,
-                        "maxItems": 5
+                        "items": {"type": "string"}
                     }
                 },
                 "required": ["ai_response_sentence", "nouns", "adjectives", "verbs"]
@@ -65,11 +60,17 @@ PROMPT_TEMPLATE_get_conversation_helper_json = """
 
 You are helping people practice speaking in a new language. Two people are having a conversation, and you need to provide assistance when they get stuck or need vocabulary support.
 
-## Your Task
-Analyze the ongoing conversation and generate an output in the following JSON format:
+## STRICT OUTPUT REQUIREMENTS
+You must follow these requirements exactly:
+1. Return EXACTLY 5 nouns - no more, no less
+2. Return EXACTLY 5 adjectives - no more, no less
+3. Return EXACTLY 5 verbs - no more, no less
+4. Return EXACTLY 1 ai_response_sentence - no more, no less
 
+## Output Format
+Your response must be in this exact JSON format:
 {{
-  "ai_response_sentence": "A natural sentence that could continue the conversation",
+  "ai_response_sentence": "A single natural sentence that could continue the conversation",
   "nouns": ["word1", "word2", "word3", "word4", "word5"],
   "adjectives": ["word1", "word2", "word3", "word4", "word5"],
   "verbs": ["word1", "word2", "word3", "word4", "word5"]
@@ -78,14 +79,15 @@ Analyze the ongoing conversation and generate an output in the following JSON fo
 ## Guidelines
 
 ### For Word Lists (nouns, adjectives, verbs):
-- Provide exactly 5 words in each category
+- You MUST provide EXACTLY 5 words in each category
 - Choose words that are relevant to the current conversation topic
 - Include words that might naturally come up as the conversation continues
 - Focus on practical, commonly used words that learners can easily incorporate
 - Consider the conversation's direction and potential next topics
+- If you can't think of enough relevant words, use generic words to complete the list
 
 ### For AI Response Sentence:
-- Create ONE complete, natural sentence that could logically continue the conversation
+- Create EXACTLY ONE complete, natural sentence
 - Make it something either speaker could realistically say next
 - Keep it at an appropriate difficulty level for language learners
 - Ensure it flows naturally from the conversation context
@@ -94,9 +96,10 @@ Analyze the ongoing conversation and generate an output in the following JSON fo
 ## Current Conversation Doc:
 {conversation_doc}
 
-## Important Notes:
+## Final Reminder
 - Respond ONLY with the JSON format above
 - No additional explanations or text outside the JSON
 - Words should be in the target language being practiced
-- The ai_response_sentence should sound natural and conversational, not formal or robotic
+- The ai_response_sentence should sound natural and conversational
+- REMEMBER: EXACTLY 5 words in each list and EXACTLY 1 response sentence
 """
