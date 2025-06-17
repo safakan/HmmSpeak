@@ -30,24 +30,21 @@ def process_audio():
 
 
     try:
+        ##
+
         # Ensure the stream is at the beginning before reading its content
         audio_file.stream.seek(0)
-        
-        ### TRANSCRIBE
         logger.info('Calling transcribe_audio...')
         transcription = transcribe_audio(audio_file)
         logger.info(f'Transcription result: {transcription}')
 
-        ### FORMAT AS INPUT TO LLM
+        # Get LLM response
         prompt = PROMPT_TEMPLATE_get_conversation_helper_json.format(
             conversation_doc=transcription
         )
-
-        ### REQUEST RESPONSE FROM LLM
         llm_response = prompt_llm(prompt)
         response_data = json.loads(llm_response)
         
-        ##### BELOW PART I NEED TO UNDERSTAND BETTER IN HOW INTERACTS...
         # Add transcription to response
         response_data['transcription'] = transcription
 
