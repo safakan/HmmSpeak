@@ -112,17 +112,56 @@ class AudioRecorder {
             aiResponseElement.textContent = data.ai_response_sentence;
         }
 
-        // Update word lists
-        const updateWordList = (elementId, words) => {
+        // Helper function to get current words from DOM
+        const getCurrentWords = (elementId) => {
             const element = document.getElementById(elementId);
-            if (element) {
-                element.innerHTML = words.map(word => `<div class="word">${word}</div>`).join('');
-            }
+            if (!element) return [];
+            return Array.from(element.children).map(wordDiv => wordDiv.textContent);
         };
 
-        updateWordList('nouns-list', data.nouns);
-        updateWordList('adjectives-list', data.adjectives);
-        updateWordList('verbs-list', data.verbs);
+        // Helper function to randomly select n items from array
+        const randomSelect = (array, n) => {
+            const shuffled = [...array].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, n);
+        };
+
+        // Helper function to update word list with random replacement
+        const updateWordListWithRandomReplacement = (elementId, newWords) => {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const currentWords = getCurrentWords(elementId);
+            
+            // If no current words, just display all new words
+            if (currentWords.length === 0) {
+                element.innerHTML = newWords.map(word => `<div class="word">${word}</div>`).join('');
+                return;
+            }
+
+            // Randomly select 3 words to replace (or less if fewer words available)
+            const replaceCount = Math.min(3, currentWords.length, newWords.length);
+            const wordsToReplace = randomSelect(currentWords, replaceCount);
+            const newWordsToAdd = randomSelect(newWords, replaceCount);
+
+            // Create new word list
+            let updatedWords = [...currentWords];
+            
+            // Replace selected words with new ones
+            wordsToReplace.forEach((oldWord, index) => {
+                const oldIndex = updatedWords.indexOf(oldWord);
+                if (oldIndex !== -1 && newWordsToAdd[index]) {
+                    updatedWords[oldIndex] = newWordsToAdd[index];
+                }
+            });
+
+            // Update DOM
+            element.innerHTML = updatedWords.map(word => `<div class="word">${word}</div>`).join('');
+        };
+
+        // Update each word list with random replacement
+        updateWordListWithRandomReplacement('nouns-list', data.nouns);
+        updateWordListWithRandomReplacement('adjectives-list', data.adjectives);
+        updateWordListWithRandomReplacement('verbs-list', data.verbs);
 
         // Append transcription
         if (data.transcription) {
