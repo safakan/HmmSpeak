@@ -82,6 +82,10 @@ class AudioRecorder {
     async sendAudioChunk(audioBlob) {
         const formData = new FormData();
         formData.append('audio', audioBlob, 'audio.wav'); // Sending as WAV
+        
+        // Add keywords to the request
+        const keywords = keywordManager.getKeywords();
+        formData.append('keywords', JSON.stringify(keywords));
 
         try {
             const response = await fetch('/process-audio', {
@@ -275,6 +279,70 @@ class AudioRecorder {
     }
 }
 
+// Keyword management functionality
+class KeywordManager {
+    constructor() {
+        this.keywords = [];
+        this.input = document.getElementById('keyword-input');
+        this.tagsContainer = document.getElementById('keyword-tags');
+        this.init();
+    }
+
+    init() {
+        if (this.input) {
+            this.input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    this.addKeyword();
+                }
+            });
+        }
+    }
+
+    addKeyword() {
+        const value = this.input.value.trim();
+        if (value) {
+            // Split by comma and add each keyword
+            const newKeywords = value.split(',').map(k => k.trim()).filter(k => k);
+            newKeywords.forEach(keyword => {
+                if (keyword && !this.keywords.includes(keyword)) {
+                    this.keywords.push(keyword);
+                }
+            });
+            this.input.value = '';
+            this.renderTags();
+        }
+    }
+
+    removeKeyword(keyword) {
+        this.keywords = this.keywords.filter(k => k !== keyword);
+        this.renderTags();
+    }
+
+    renderTags() {
+        if (this.tagsContainer) {
+            this.tagsContainer.innerHTML = this.keywords.map(keyword => 
+                `<div class="keyword-tag">
+                    ${keyword}
+                    <button class="remove-btn" onclick="keywordManager.removeKeyword('${keyword}')">×</button>
+                </div>`
+            ).join('');
+        }
+    }
+
+    getKeywords() {
+        return this.keywords.length > 0 ? this.keywords : ["no", "keywords", "were", "added"];
+    }
+
+    clearKeywords() {
+        this.keywords = [];
+        this.renderTags();
+    }
+}
+
+// Initialize keyword manager
+const keywordManager = new KeywordManager();
+
 // Initialize recorder
 const recorder = new AudioRecorder();
 
@@ -291,6 +359,8 @@ if (startButton) {
                 if (transcriptionElement) {
                     transcriptionElement.textContent = '';
                 }
+                // Clear keywords for new session
+                keywordManager.clearKeywords();
                 await recorder.startRecording();
                 startButton.textContent = '⏹ Stop Practice';
                 if (statusText) {

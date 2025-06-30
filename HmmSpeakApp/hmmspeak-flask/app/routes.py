@@ -39,9 +39,20 @@ def process_audio():
         transcription = transcribe_audio(audio_file)
         logger.info(f'Transcription result: {transcription}')
 
+        ### GET KEYWORDS FROM REQUEST
+        conversation_keywords_from_users = ["no", "keywords", "were", "added"]  # default
+        if 'keywords' in request.form:
+            try:
+                keywords_json = request.form['keywords']
+                conversation_keywords_from_users = json.loads(keywords_json)
+                logger.info(f'Keywords received: {conversation_keywords_from_users}')
+            except json.JSONDecodeError as e:
+                logger.error(f'Failed to parse keywords JSON: {e}')
+                conversation_keywords_from_users = ["no", "keywords", "were", "added"]
+        
         ### FORMAT AS INPUT TO LLM
         prompt = PROMPT_TEMPLATE_get_conversation_helper_json.format(
-            conversation_doc=transcription
+            conversation_doc=transcription, conversation_keywords=conversation_keywords_from_users
         )
 
         ### REQUEST RESPONSE FROM LLM

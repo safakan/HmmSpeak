@@ -88,6 +88,57 @@ body {
     color: #666;
 }
 
+/* Keyword Input */
+.keyword-input-container {
+    margin-bottom: 2rem;
+}
+
+.keyword-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.keyword-input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.keyword-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.keyword-tag {
+    background-color: #3498db;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.keyword-tag .remove-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0;
+    margin-left: 0.25rem;
+}
+
+.keyword-tag .remove-btn:hover {
+    opacity: 0.8;
+}
+
 /* AI Sidekick Box */
 .ai-sidekick-box {
     background-color: #f8f9fa;
