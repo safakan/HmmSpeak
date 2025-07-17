@@ -12,6 +12,7 @@ HmmSpeak helps people practice speaking skills in a new language with real-time 
    - Use the suggested words to form their own sentences
    - Repeat the AI response to continue the conversation
    - Improvise based on suggestions
+   - Guide the conversation manually with custom keyboards
 
 ## Data Flow
 
@@ -31,12 +32,13 @@ Output format:
 
 ## Repository Structure
 
-- `HmmSpeakApp/` - Location of the main HmmSpeak app.
 - `playground/` - Sandbox area for app-related experiments
 - `week1/` - Initial app concept and Gradio UI
 - `week2/` - Raw HTML/CSS/JS demo
 - `week3/` - Gradio implementation with local and Hugging Face versions
 - `week4/` - Flask web app, MCP and RAG implementation
+- `week5/` - Basic app demo
+- `week6/` - Functional prototype
 
 Each weekly folder contains its own README.md with detailed instructions.
 
